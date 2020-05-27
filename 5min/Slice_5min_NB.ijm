@@ -6,7 +6,7 @@ run("Clear", "slice");
 
 run("8-bit");
 
-setThreshold(1, 255);
+setThreshold(0, 0);
 run("Convert to Mask", "method=Default background=Light");
 
 run("Stack to Images");
@@ -16,7 +16,7 @@ run("Stack to Images");
 for (i = 1; i <= 100; i++) {
 
 selectWindow("slice:" + toString(i));
-saveAs("Tiff", "C:/Users/George/Desktop/CHE4180/NEW Project Material/Cropped/ROC Prep/5min_NB_slice" + toString(i) + ".tif");
+saveAs("Tiff", "C:/Users/George/Desktop/CHE4180/NEW Project Material/Cropped/ROC Prep 5min/5min_NB_slice" + toString(i) + ".tif");
 close();
 
 }
