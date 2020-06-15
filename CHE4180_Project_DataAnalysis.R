@@ -66,56 +66,16 @@ error_all <- bind_rows(error0, error5, error10, error15)%>%
   rename(Model = ErrorType)
 
 #Error plot
+mycols <- c("red", "yellow3", "green")
+
 error_all %>%
   ggplot(aes(x = Frame, y = abs(Error) * 100, colour = Model)) +
-  geom_line() +
+  geom_line(size = 1) +
   facet_grid(vars(Time)) +
   labs(y = "Absolute Percentage Error %",
-       title = "Absolute Percentage Error on Integrated Density Measurements")
-
-
-#Int Den plot
-intden_0 <- intden %>%
-  select(Frame, RF0, NB0, Man0) %>%
-  mutate(Time = "0 min") %>%
-  rename(`Random Forest` = RF0,
-         `Naive Bayesian` = NB0,
-         `Manual` = Man0) %>%
-  pivot_longer(-c(Frame, Time), names_to = "Model", values_to = "IntDen")
-
-intden_5 <- intden %>%
-  select(Frame, RF5, NB5, Man5, RF5_0min) %>%
-  mutate(Time = "05 min") %>%
-  rename(`Random Forest` = RF5,
-         `Naive Bayesian` = NB5,
-         `Manual` = Man5,
-         `0min general Random Forest` = RF5_0min) %>%
-  pivot_longer(-c(Frame, Time), names_to = "Model", values_to = "IntDen")
-
-intden_10 <- intden %>%
-  select(Frame, RF10, NB10, Man10, RF10_0min) %>%
-  mutate(Time = "10 min") %>%
-  rename(`Random Forest` = RF10,
-         `Naive Bayesian` = NB10,
-         `Manual` = Man10,
-         `0min general Random Forest` = RF10_0min) %>%
-  pivot_longer(-c(Frame, Time), names_to = "Model", values_to = "IntDen")
-
-intden_15 <- intden %>%
-  select(Frame, RF15, NB15, Man15, RF15_0min) %>%
-  mutate(Time = "15 min") %>%
-  rename(`Random Forest` = RF15,
-         `Naive Bayesian` = NB15,
-         `Manual` = Man15,
-         `0min general Random Forest` = RF15_0min) %>%
-  pivot_longer(-c(Frame, Time), names_to = "Model", values_to = "IntDen")
-
-intden_plot <- bind_rows(intden_0, intden_5, intden_10, intden_15)
-
-intden_plot %>%
-  ggplot(aes(x = Frame, y = IntDen, colour = Time)) +
-  geom_line() +
-  facet_grid(vars(Model), scales = "free_y")
+       title = "Absolute Percentage Error on Integrated Density Measurements") +
+  scale_colour_manual(name = "Deep Learning Model",
+                      values = mycols)
 
 #ROC & performance measures------------------
 
@@ -772,3 +732,75 @@ rf0_area_15min %>%
          area_tri = 0.5 * (lead(x) - x) * abs(y - lead(y))) %>%
   summarise(area = sum(area_rec + area_tri,
                        na.rm = TRUE)) #0.933
+
+
+#Summarise ROC performance evaluation measures-------------------------------
+# Summarising 0mins
+table_0min %>% 
+  group_by(Type) %>% 
+  summarise(mean1 = mean(Accuracy),
+            sd1 = sd(Accuracy),
+            mean2 = mean(Sensitivity),
+            sd2 = sd(Sensitivity),
+            mean3 = mean(Specificity),
+            sd3 = sd(Specificity),
+            mean4 = mean(Precision),
+            sd4 = sd(Precision),
+            mean5 = mean(`F-score`),
+            sd5 = sd(`F-score`))
+
+# Summarising 5mins
+table_5min %>% 
+  group_by(Type) %>% 
+  summarise(mean1 = mean(Accuracy),
+            sd1 = sd(Accuracy),
+            mean2 = mean(Sensitivity),
+            sd2 = sd(Sensitivity),
+            mean3 = mean(Specificity),
+            sd3 = sd(Specificity),
+            mean4 = mean(Precision),
+            sd4 = sd(Precision),
+            mean5 = mean(`F-score`),
+            sd5 = sd(`F-score`))
+
+# Summarising 10mins
+table_10min %>% 
+  group_by(Type) %>% 
+  summarise(mean1 = mean(Accuracy),
+            sd1 = sd(Accuracy),
+            mean2 = mean(Sensitivity),
+            sd2 = sd(Sensitivity),
+            mean3 = mean(Specificity),
+            sd3 = sd(Specificity),
+            mean4 = mean(Precision),
+            sd4 = sd(Precision),
+            mean5 = mean(`F-score`),
+            sd5 = sd(`F-score`))
+
+# Summarising 15mins
+table_15min %>% 
+  group_by(Type) %>% 
+  summarise(mean1 = mean(Accuracy),
+            sd1 = sd(Accuracy),
+            mean2 = mean(Sensitivity),
+            sd2 = sd(Sensitivity),
+            mean3 = mean(Specificity),
+            sd3 = sd(Specificity),
+            mean4 = mean(Precision),
+            sd4 = sd(Precision),
+            mean5 = mean(`F-score`),
+            sd5 = sd(`F-score`))
+
+# Summarising ALL
+table_all %>% 
+  group_by(Type) %>% 
+  summarise(mean1 = mean(Accuracy),
+            sd1 = sd(Accuracy),
+            mean2 = mean(Sensitivity),
+            sd2 = sd(Sensitivity),
+            mean3 = mean(Specificity),
+            sd3 = sd(Specificity),
+            mean4 = mean(Precision),
+            sd4 = sd(Precision),
+            mean5 = mean(`F-score`),
+            sd5 = sd(`F-score`))
