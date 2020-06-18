@@ -471,6 +471,19 @@ ggplot(NULL) +
   theme_bw() +
   ggtitle("ROC Curve for Random Forest & Generalised(0min) Random Forest - All data")
 
+#All together
+ggplot(NULL) +
+  geom_segment(aes(x = 0, y = 0, xend = 1,yend = 1), alpha = 0.5) + 
+  geom_path(aes(x = rf_plotx, y = rf_ploty), colour = "green", size = 1) +
+  geom_path(aes(x = rf0_plotx, y = rf0_ploty), colour = "red", size = 1) +
+  geom_path(aes(x = nb_plotx, y = nb_ploty), colour = "blue", size = 1) +
+  scale_x_continuous(name = "1 - Specificity",limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001,0.001)) + 
+  scale_y_continuous(name = "Sensitivity", limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001, 0.001)) +
+  theme(axis.ticks = element_line(color = "grey80")) +
+  coord_equal() +
+  theme_bw() +
+  ggtitle("ROC Curves - All data")
+
 
 
 
@@ -522,7 +535,7 @@ ggplot(NULL) +
   theme(axis.ticks = element_line(color = "grey80")) +
   coord_equal() +
   theme_bw() +
-  ggtitle("ROC Curve for Random Forest & Naive Bayesian at 0 min")
+  ggtitle("ROC Curves - 0 min")
 
 
 #AUC
@@ -580,6 +593,19 @@ ggplot(NULL) +
   theme_bw() +
   ggtitle("ROC Curve for Random Forest & Generalised(0min) Random Forest at 5 min")
 
+#All together
+
+ggplot(NULL) +
+  geom_segment(aes(x = 0, y = 0, xend = 1,yend = 1), alpha = 0.5) + 
+  geom_path(aes(x = rf_plotx_5min, y = rf_ploty_5min), colour = "green", size = 1) +
+  geom_path(aes(x = nb_plotx_5min, y = nb_ploty_5min), colour = "blue", size = 1) +
+  geom_path(aes(x = rf0_plotx_5min, y = rf0_ploty_5min), colour = "red", size = 1) +
+  scale_x_continuous(name = "1 - Specificity",limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001,0.001)) + 
+  scale_y_continuous(name = "Sensitivity", limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001, 0.001)) +
+  theme(axis.ticks = element_line(color = "grey80")) +
+  coord_equal() +
+  theme_bw() +
+  ggtitle("ROC Curves - 5 min")
 
 #AUC
 #RF
@@ -643,6 +669,19 @@ ggplot(NULL) +
   theme_bw() +
   ggtitle("ROC Curve for Random Forest & Generalised(0min) Random Forest at 10 min") 
 
+#All together
+ggplot(NULL) +
+  geom_segment(aes(x = 0, y = 0, xend = 1,yend = 1), alpha = 0.5) + 
+  geom_path(aes(x = rf_plotx_10min, y = rf_ploty_10min), colour = "green", size = 1) +
+  geom_path(aes(x = rf0_plotx_10min, y = rf0_ploty_10min), colour = "red", size = 1) +
+  geom_path(aes(x = nb_plotx_10min, y = nb_ploty_10min), colour = "blue", size = 1) +
+  scale_x_continuous(name = "1 - Specificity",limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001,0.001)) + 
+  scale_y_continuous(name = "Sensitivity", limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001, 0.001)) +
+  theme(axis.ticks = element_line(color = "grey80")) +
+  coord_equal() +
+  theme_bw() +
+  ggtitle("ROC Curves - 10 min") 
+
 #AUC
 #RF
 rf_area_10min <- tibble(x = rf_plotx_10min, y = rf_ploty_10min)
@@ -704,6 +743,19 @@ ggplot(NULL) +
   coord_equal() +
   theme_bw() +
   ggtitle("ROC Curve for Random Forest & Generalised(0min) Random Forest at 15 min")  
+
+#All together
+ggplot(NULL) +
+  geom_segment(aes(x = 0, y = 0, xend = 1,yend = 1), alpha = 0.5) + 
+  geom_path(aes(x = rf_plotx_15min, y = rf_ploty_15min), colour = "green", size = 1) +
+  geom_path(aes(x = rf0_plotx_15min, y = rf0_ploty_15min), colour = "red", size = 1) +
+  geom_path(aes(x = nb_plotx_15min, y = nb_ploty_15min), colour = "blue", size = 1) +
+  scale_x_continuous(name = "1 - Specificity",limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001,0.001)) + 
+  scale_y_continuous(name = "Sensitivity", limits = c(0,1), breaks = seq(0,1,0.2), expand = c(0.001, 0.001)) +
+  theme(axis.ticks = element_line(color = "grey80")) +
+  coord_equal() +
+  theme_bw() +
+  ggtitle("ROC Curves - 15 min")  
 
 #AUC
 #RF
